@@ -1,5 +1,13 @@
 package com.redhat.drupal;
 
+import java.io.StringReader;
+
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
+
+import org.xml.sax.InputSource;
+
 public abstract class Node {
 	private int nid;
 	private int uid;
@@ -19,6 +27,28 @@ public abstract class Node {
 	private String accessState;
 	private String path;
 	private String name;
+	
+	public abstract String toXml();
+	
+	public void fromXml(String xml) {
+		// parse the XML using SAX for efficiency
+		XPathFactory xpathFactory = XPathFactory.newInstance();
+		XPath xpath = xpathFactory.newXPath();
+		
+		System.out.println(xml);
+		
+		try {
+			String nid = xpath.evaluate("/result/nid", new InputSource(new StringReader(xml)));
+			this.nid = Integer.valueOf(nid).intValue();
+			
+			String title = xpath.evaluate("/result/title", new InputSource(new StringReader(xml)));
+			this.title = title;
+			
+		} catch (XPathExpressionException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 	public int getNid() {
 		return nid;
