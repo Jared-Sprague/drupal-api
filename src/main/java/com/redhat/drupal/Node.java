@@ -33,6 +33,10 @@ public abstract class Node {
 	private XPathFactory xpathFactory = XPathFactory.newInstance();
 	private XPath xpath = xpathFactory.newXPath();
 
+	/**
+	 * Parse the out the common node fields from the XML from a services GET request
+	 * @param xml
+	 */
 	public void fromXml(String xml) {
 		this.nid = Utils.safeNewInteger(parseField("/result/nid", xml));
 		this.uid = Utils.safeNewInteger(parseField("/result/uid", xml));
