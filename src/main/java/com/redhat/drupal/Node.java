@@ -6,155 +6,221 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
+import org.apache.commons.lang.StringUtils;
 import org.xml.sax.InputSource;
 
+
 public abstract class Node {
-	private int nid;
-	private int uid;
-	private String title;
-	private String log;
-	private int status;
-	private int comment;
-	private int vid;
-	private String type;
-	private String language;
-	private int created;
-	private int changed;
-	private int tnid;
-	private int translate;
-	private int revisionTimestamp;
-	private int revisionUid;
-	private String accessState;
-	private String path;
-	private String name;
+	protected Integer nid;  // Node ID
+	protected Integer uid;  // The users.uid that owns this node; initially, this is the user that created it.
+	protected String title;  // Title of the node
+	protected String log;  // last revision log message
+	protected Boolean status;  // Boolean flag if this has a published revision or not
+	protected Integer comment;  // how many comments does this node have
+	protected Integer vid;  // current revision ID of this node
+	protected String type;  // content type
+	protected String language;  // language of this node and revision
+	protected Integer created;  // timestamp of when this node was created
+	protected Integer changed;  // timestamp of when this node was last updated
+	protected Integer tnid;  // parent node id of which this node is a translation
+	protected Boolean translate;   // A boolean indicating whether this translation page needs to be updated
+	protected Integer revisionTimestamp;  // timestimp of the revision
+	protected Integer revisionUid;  // uid of revision author
+	protected String accessState;  // access state for private, retired, active
+	protected String path;  // full URL path to this node
+	protected String name;  // username of the person who created this node
 	
-	public abstract String toXml();
-	
+	private XPathFactory xpathFactory = XPathFactory.newInstance();
+	private XPath xpath = xpathFactory.newXPath();
+
 	public void fromXml(String xml) {
-		// parse the XML using SAX for efficiency
-		XPathFactory xpathFactory = XPathFactory.newInstance();
-		XPath xpath = xpathFactory.newXPath();
+		this.nid = Utils.safeNewInteger(parseField("/result/nid", xml));
+		this.uid = Utils.safeNewInteger(parseField("/result/uid", xml));
+		this.title = parseField("/result/title", xml);
+		this.log = parseField("/result/log", xml);
+		this.status = safeNewBoolean(parseField("/result/status", xml));
+		this.comment = Utils.safeNewInteger(parseField("/result/comment", xml));		
+		this.vid = Utils.safeNewInteger(parseField("/result/vid", xml));
+		this.type = parseField("/result/type", xml);
+		this.language = parseField("/result/language", xml);
+		this.created = Utils.safeNewInteger(parseField("/result/created", xml));	
+		this.changed = Utils.safeNewInteger(parseField("/result/changed", xml));
+		this.tnid = Utils.safeNewInteger(parseField("/result/tnid", xml));	
+		this.translate = safeNewBoolean(parseField("/result/translate", xml));
 		
-		System.out.println(xml);
-		
+		//TODO: move these red hat specific fields to the red hat content types library
+		this.revisionTimestamp = Utils.safeNewInteger(parseField("/result/revision_timestamp", xml));	
+		this.revisionUid = Utils.safeNewInteger(parseField("/result/revision_uid", xml));
+		this.accessState = parseField("/result/access_state", xml);
+		this.path = parseField("/result/path", xml);
+		this.name = parseField("/result/name", xml);
+	}
+	
+	private Boolean safeNewBoolean(String booleanString) {
+		if (!StringUtils.isBlank(booleanString)	&& (booleanString.equals("0") || booleanString.equals("1"))) {
+			if (booleanString.equals("1")) {
+				return new Boolean(true);
+			} else {
+				return new Boolean(false);
+			}
+		}
+		return null;
+	}
+
+	private String parseField(String fieldName, String xml) {
+		String parsedField = null;
 		try {
-			String nid = xpath.evaluate("/result/nid", new InputSource(new StringReader(xml)));
-			this.nid = Integer.valueOf(nid).intValue();
-			
-			String title = xpath.evaluate("/result/title", new InputSource(new StringReader(xml)));
-			this.title = title;
-			
+			parsedField = xpath.evaluate(fieldName, new InputSource(new StringReader(xml)));
 		} catch (XPathExpressionException e) {
 			e.printStackTrace();
+		} 
+		
+		if (StringUtils.isBlank(parsedField)) {
+			parsedField = null;  
 		}
+		return parsedField;
 	}
-	
-	
-	public int getNid() {
+
+	public Integer getNid() {
 		return nid;
 	}
-	public void setNid(int nid) {
+
+	public void setNid(Integer nid) {
 		this.nid = nid;
 	}
-	public int getUid() {
+
+	public Integer getUid() {
 		return uid;
 	}
-	public void setUid(int uid) {
+
+	public void setUid(Integer uid) {
 		this.uid = uid;
 	}
+
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
 	public String getLog() {
 		return log;
 	}
+
 	public void setLog(String log) {
 		this.log = log;
 	}
-	public int getStatus() {
+
+	public Boolean getStatus() {
 		return status;
 	}
-	public void setStatus(int status) {
+
+	public void setStatus(Boolean status) {
 		this.status = status;
 	}
-	public int getComment() {
+
+	public Integer getComment() {
 		return comment;
 	}
-	public void setComment(int comment) {
+
+	public void setComment(Integer comment) {
 		this.comment = comment;
 	}
-	public int getVid() {
+
+	public Integer getVid() {
 		return vid;
 	}
-	public void setVid(int vid) {
+
+	public void setVid(Integer vid) {
 		this.vid = vid;
 	}
+
 	public String getType() {
 		return type;
 	}
-	public void setType(String type) {
+
+	protected void setType(String type) {
 		this.type = type;
 	}
+
 	public String getLanguage() {
 		return language;
 	}
+
 	public void setLanguage(String language) {
 		this.language = language;
 	}
-	public int getCreated() {
+
+	public Integer getCreated() {
 		return created;
 	}
-	public void setCreated(int created) {
+
+	public void setCreated(Integer created) {
 		this.created = created;
 	}
-	public int getChanged() {
+
+	public Integer getChanged() {
 		return changed;
 	}
-	public void setChanged(int changed) {
+
+	public void setChanged(Integer changed) {
 		this.changed = changed;
 	}
-	public int getTnid() {
+
+	public Integer getTnid() {
 		return tnid;
 	}
-	public void setTnid(int tnid) {
+
+	public void setTnid(Integer tnid) {
 		this.tnid = tnid;
 	}
-	public int getTranslate() {
+
+	public Boolean getTranslate() {
 		return translate;
 	}
-	public void setTranslate(int translate) {
+
+	public void setTranslate(Boolean translate) {
 		this.translate = translate;
 	}
-	public int getRevisionTimestamp() {
+
+	public Integer getRevisionTimestamp() {
 		return revisionTimestamp;
 	}
-	public void setRevisionTimestamp(int revisionTimestamp) {
+
+	public void setRevisionTimestamp(Integer revisionTimestamp) {
 		this.revisionTimestamp = revisionTimestamp;
 	}
-	public int getRevisionUid() {
+
+	public Integer getRevisionUid() {
 		return revisionUid;
 	}
-	public void setRevisionUid(int revisionUid) {
+
+	public void setRevisionUid(Integer revisionUid) {
 		this.revisionUid = revisionUid;
 	}
+
 	public String getAccessState() {
 		return accessState;
 	}
+
 	public void setAccessState(String accessState) {
 		this.accessState = accessState;
 	}
+
 	public String getPath() {
 		return path;
 	}
+
 	public void setPath(String path) {
 		this.path = path;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
