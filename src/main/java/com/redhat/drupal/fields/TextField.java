@@ -17,11 +17,19 @@ public class TextField extends Field {
 
 	@Override
 	protected String innerPostXml() {
+		if (!isSet()) {
+			return null;
+		}
+		
 		return "<value>" + this.value + "</value>";
 	}
 
 	@Override
 	protected String innerAllXml() {
+		if (!isSet()) {
+			return null;
+		}
+		
 		StringBuffer sb = new StringBuffer();
 		sb.append(innerPostXml());
 		sb.append("<safe_value>").append(this.safeValue).append("</safe_value>");
@@ -36,6 +44,11 @@ public class TextField extends Field {
 		this.format = parseField("//" + this.machineName + "//format", xml);
 	}
 
+	@Override
+	public boolean isSet() {
+		return this.value != null;
+	}
+	
 	public String getValue() {
 		return value;
 	}

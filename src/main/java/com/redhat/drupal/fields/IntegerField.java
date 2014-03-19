@@ -21,7 +21,16 @@ public class IntegerField extends Field {
 
 	@Override
 	protected String innerPostXml() {
+		if (!isSet()) {
+			return null;
+		}
+		
 		return "<value>" + this.value + "</value>";
+	}
+	
+	@Override
+	public boolean isSet() {
+		return this.value != null;
 	}
 
 	@Override

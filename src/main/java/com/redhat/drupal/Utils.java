@@ -10,10 +10,10 @@ public class Utils {
 		return null;
 	}
 
-	public static Float safeNewFloat(String floatString) {
-		if (!StringUtils.isBlank(floatString)) {
+	public static Double safeNewDouble(String doubleString) {
+		if (!StringUtils.isBlank(doubleString)) {
 			try {
-				return new Float(floatString);
+				return new Double(doubleString);
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
 			}

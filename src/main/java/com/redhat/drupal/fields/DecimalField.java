@@ -3,7 +3,7 @@ package com.redhat.drupal.fields;
 import com.redhat.drupal.Utils;
 
 public class DecimalField extends Field {
-	private Float value;
+	private Double value;
 	
 	public DecimalField(String machineName) {
 		this.machineName = machineName;
@@ -16,11 +16,15 @@ public class DecimalField extends Field {
 
 	@Override
 	public void fromXml(String xml) {
-		this.value = Utils.safeNewFloat(parseField("//" + this.machineName + "//value", xml));
+		this.value = Utils.safeNewDouble(parseField("//" + this.machineName + "//value", xml));
 	}
 
 	@Override
 	protected String innerPostXml() {
+		if (!isSet()) {
+			return null;
+		}
+		
 		return "<value>" + this.value + "</value>";
 	}
 
@@ -30,11 +34,16 @@ public class DecimalField extends Field {
 		return innerPostXml();
 	}
 
-	public Float getValue() {
+	public Double getValue() {
 		return value;
 	}
 
-	public void setValue(Float value) {
+	public void setValue(Double value) {
 		this.value = value;
+	}
+	
+	@Override
+	public boolean isSet() {
+		return this.value != null;
 	}
 }

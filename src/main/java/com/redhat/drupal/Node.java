@@ -9,6 +9,8 @@ import javax.xml.xpath.XPathFactory;
 import org.apache.commons.lang.StringUtils;
 import org.xml.sax.InputSource;
 
+import com.redhat.drupal.fields.Field;
+
 
 public abstract class Node {
 	protected Integer nid;  // Node ID
@@ -83,6 +85,12 @@ public abstract class Node {
 			parsedField = null;  
 		}
 		return parsedField;
+	}
+	
+	protected void appendValidXml(StringBuffer sb, Field field) {
+		if (field.isSet()) {
+			sb.append(field.toPostXml());
+		}
 	}
 
 	public Integer getNid() {

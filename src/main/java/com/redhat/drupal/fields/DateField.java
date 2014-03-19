@@ -22,6 +22,10 @@ public class DateField extends Field {
 
 	@Override
 	protected String innerPostXml() {
+		if (!isSet()) {
+			return null;
+		}
+		
 		// format for POST and PUT date string: 03/14/2014 - 15:15:15
 		String dateString = new SimpleDateFormat("MM/dd/yyyy - HH:mm:ss", Locale.ENGLISH).format(this.value);
 		return "<value><date>" + dateString + "</date></value>";
@@ -45,12 +49,21 @@ public class DateField extends Field {
 	
 	@Override
 	protected String innerAllXml() {
+		if (!isSet()) {
+			return null;
+		}
+		
 		StringBuffer sb = new StringBuffer();
 		sb.append(innerPostXml());
 		sb.append("<timezone>").append(this.timezone).append("</timezone>");
 		sb.append("<timezone_db>").append(this.timezoneDb).append("</timezone_db>");
 		sb.append("<date_type>").append(this.dateType).append("</date_type>");
 		return sb.toString();
+	}
+	
+	@Override
+	public boolean isSet() {
+		return this.value != null;
 	}
 
 	public Date getValue() {

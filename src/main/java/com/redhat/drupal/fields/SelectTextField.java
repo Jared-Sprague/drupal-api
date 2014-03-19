@@ -11,6 +11,10 @@ public class SelectTextField extends TextField {
 	
 	@Override
 	protected String innerPostXml() {
+		if (!isSet()) {
+			return null;
+		}
+		
 		return "<value is_raw=\"true\">" + this.value + "</value>";
 	}
 }

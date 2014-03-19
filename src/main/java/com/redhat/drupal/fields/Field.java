@@ -46,6 +46,10 @@ public abstract class Field {
 	 * @return
 	 */
 	protected String formatXml(String innerXml) {
+		if (innerXml == null) {
+			return null;
+		}
+ 		
 		StringBuffer sb = new StringBuffer();
 		sb.append("<").append(this.machineName).append(">");
 		sb.append("<und is_array=\"true\">");
@@ -78,9 +82,11 @@ public abstract class Field {
 	public String toXml() {
 		return formatXml(innerAllXml());
 	}
-
+	
 	protected abstract String innerPostXml();
 
 	protected abstract String innerAllXml();
+	
+	public abstract boolean isSet();
 
 }
