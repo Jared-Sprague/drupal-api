@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import org.apache.commons.lang.StringUtils;
+
 public class DateField extends Field {
 	private Date value;
 	private String timezone;
@@ -36,6 +38,16 @@ public class DateField extends Field {
 		// Date format from GET XML: 2014-03-14 14:15:00
 		
 		String dateString = parseField("//" + this.machineName + "//value", xml);
+		
+		// if there is no date sting then this isn't valid date field XML so ignore it
+		if (StringUtils.isBlank(dateString)) {
+			this.value = null;
+			this.timezone = null;
+			this.timezoneDb = null;
+			this.dateType = null;
+			return;
+		}
+		
 		try {
 			this.value = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).parse(dateString);
 		} catch (ParseException e) {
