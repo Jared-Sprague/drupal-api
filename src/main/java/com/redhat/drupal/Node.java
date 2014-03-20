@@ -9,6 +9,7 @@ import javax.xml.xpath.XPathFactory;
 import org.apache.commons.lang.StringUtils;
 import org.xml.sax.InputSource;
 
+import com.redhat.drupal.exceptions.InvalidNodeXmlException;
 import com.redhat.drupal.fields.Field;
 
 
@@ -40,6 +41,10 @@ public abstract class Node {
 	 * @param xml
 	 */
 	public void fromXml(String xml) {
+		if (!validNodeXml(xml)) {
+			throw new InvalidNodeXmlException("Invalid node XML: " + xml);
+		}
+		
 		this.nid = Utils.safeNewInteger(parseField("/result/nid", xml));
 		this.uid = Utils.safeNewInteger(parseField("/result/uid", xml));
 		this.title = parseField("/result/title", xml);
@@ -62,6 +67,20 @@ public abstract class Node {
 		this.name = parseField("/result/name", xml);
 	}
 	
+	private boolean validNodeXml(String xml) {
+		// At the minimum it should have nid, type, title
+		//TODO: Better xml validation. In the absense of an xsd this validation is pretty weak
+		nid = Utils.safeNewInteger(parseField("/result/nid", xml));
+		title = parseField("/result/title", xml);
+		type = parseField("/result/type", xml);
+		
+		if (nid == null || title == null || type == null) {
+			return false;
+		}
+		
+		return true;
+	}
+
 	private Boolean safeNewBoolean(String booleanString) {
 		if (!StringUtils.isBlank(booleanString)	&& (booleanString.equals("0") || booleanString.equals("1"))) {
 			if (booleanString.equals("1")) {
