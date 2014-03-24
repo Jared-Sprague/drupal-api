@@ -3,10 +3,13 @@ package com.redhat.drupal.fields;
 import java.io.StringReader;
 
 import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import org.apache.commons.lang.StringUtils;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 public abstract class Field {
@@ -38,6 +41,36 @@ public abstract class Field {
 		}
 		return parsedField;
 	}
+	
+	protected String parseField(String fieldName, Node node) {
+		String parsedField = null;
+		try {
+			parsedField = xpath.evaluate(fieldName, node);
+		} catch (XPathExpressionException e) {
+			e.printStackTrace();
+		}
+
+		if (StringUtils.isBlank(parsedField)) {
+			parsedField = null;
+		}
+		return parsedField;
+	}
+	
+	protected NodeList parseNodeList(String exp, String xml) {
+		NodeList parsedNodeList = null;
+		try {
+			parsedNodeList = (NodeList) xpath.evaluate(exp, new InputSource(new StringReader(xml)),
+					XPathConstants.NODESET);
+		} catch (XPathExpressionException e) {
+			e.printStackTrace();
+		}
+
+		if (parsedNodeList != null && parsedNodeList.getLength() == 0) {
+			parsedNodeList = null;
+		}
+		
+		return parsedNodeList;
+	}
 
 	/**
 	 * Wrapper XML that all field types use
@@ -49,7 +82,7 @@ public abstract class Field {
 		if (innerXml == null) {
 			return null;
 		}
- 		
+
 		StringBuffer sb = new StringBuffer();
 		sb.append("<").append(this.machineName).append(">");
 		sb.append("<und is_array=\"true\">");
@@ -82,11 +115,11 @@ public abstract class Field {
 	public String toXml() {
 		return formatXml(innerAllXml());
 	}
-	
+
 	protected abstract String innerPostXml();
 
 	protected abstract String innerAllXml();
-	
+
 	public abstract boolean isSet();
 
 }
