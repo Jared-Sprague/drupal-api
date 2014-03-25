@@ -58,6 +58,11 @@ public abstract class Field {
 	
 	protected NodeList parseNodeList(String exp, String xml) {
 		NodeList parsedNodeList = null;
+		
+		if (StringUtils.isBlank(xml)) {
+			return null;
+		}
+		
 		try {
 			parsedNodeList = (NodeList) xpath.evaluate(exp, new InputSource(new StringReader(xml)),
 					XPathConstants.NODESET);
