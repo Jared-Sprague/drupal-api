@@ -29,7 +29,7 @@ public class DateField extends Field {
 		}
 		
 		// format for POST and PUT date string: 03/14/2014 - 15:15:15
-		String dateString = new SimpleDateFormat("MM/dd/yyyy - HH:mm:ss", Locale.ENGLISH).format(this.value);
+		String dateString = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH).format(this.value);
 		return "<value><date>" + dateString + "</date></value>";
 	}
 
