@@ -32,7 +32,7 @@ public class BooleanField extends Field {
 		
 		int intValue = this.value ? 1 : 0;
 		
-		return "<value>" + intValue + "</value>";
+		return "<item><value>" + intValue + "</value></item>";
 	}
 	
 	@Override

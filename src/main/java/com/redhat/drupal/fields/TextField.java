@@ -21,7 +21,7 @@ public class TextField extends Field {
 			return null;
 		}
 		
-		return "<value>" + this.value + "</value>";
+		return "<item><value>" + this.value + "</value></item>";
 	}
 
 	@Override

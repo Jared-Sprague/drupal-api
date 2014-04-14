@@ -15,6 +15,6 @@ public class SelectTextField extends TextField {
 			return null;
 		}
 		
-		return "<value is_raw=\"true\">" + this.value + "</value>";
+		return "<item><value is_raw=\"true\">" + this.value + "</value></item>";
 	}
 }

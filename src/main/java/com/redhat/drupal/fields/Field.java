@@ -91,9 +91,7 @@ public abstract class Field {
 		StringBuffer sb = new StringBuffer();
 		sb.append("<").append(this.machineName).append(">");
 		sb.append("<und is_array=\"true\">");
-		sb.append("<item>");
 		sb.append(innerXml);
-		sb.append("</item>");
 		sb.append("</und>");
 		sb.append("</").append(this.machineName).append(">");
 		return sb.toString();
