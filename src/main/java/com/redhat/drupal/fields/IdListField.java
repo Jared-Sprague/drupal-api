@@ -9,16 +9,16 @@ import org.w3c.dom.NodeList;
 
 import com.redhat.drupal.Utils;
 
-public class EntityReferencesField extends Field {
+public abstract class IdListField extends Field {
 	private List<Integer> entityIds = new ArrayList<Integer>(); 
 	private String itemValueElementName;
 	
-	public EntityReferencesField(String machineName, String itemValueElementName) {
+	public IdListField(String machineName, String itemValueElementName) {
 		this.machineName = machineName;
 		this.itemValueElementName = itemValueElementName;
 	}
 	
-	public EntityReferencesField(String machineName, String itemValueElementName, String xml) {
+	public IdListField(String machineName, String itemValueElementName, String xml) {
 		this.machineName = machineName;
 		this.itemValueElementName = itemValueElementName;
 		fromXml(xml);
