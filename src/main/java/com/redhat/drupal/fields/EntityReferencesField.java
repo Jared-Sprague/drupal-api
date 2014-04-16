@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import com.redhat.drupal.Utils;
 
 public class EntityReferencesField extends Field {
 	private List<Integer> entityIds = new ArrayList<Integer>(); 
@@ -27,8 +30,15 @@ public class EntityReferencesField extends Field {
 			return;
 		}
 
+		// Parse the list of IDs into the entityIds list
 		NodeList nodes = parseNodeList("//" + this.machineName + "/und/item", xml);
-		//TODO: finish implementing
+		for (int i = 0; i < nodes.getLength(); i++) {
+			Node node = nodes.item(i);
+			Integer value = Utils.safeNewInteger(parseField("./" + this.itemValueElementName, node));
+			if (value != null) {
+				entityIds.add(value);
+			}
+		}
 	}
 
 	@Override
@@ -37,19 +47,26 @@ public class EntityReferencesField extends Field {
 			return null;
 		}
 		
-		//TODO: actually implement this to generate the real list based on entityIds
-		return "<item><" + this.itemValueElementName + ">123</" + this.itemValueElementName + "></item>";
+		StringBuffer sb = new StringBuffer();
+		
+		// Generate the XML based on the entityIds list
+		for (Integer entityId : entityIds) {
+			String item = String.format("<item><%s>%d</%s></item>", this.itemValueElementName,
+					entityId.intValue(), this.itemValueElementName);
+			sb.append(item);
+		}
+		
+		return sb.toString();
 	}
 
 	@Override
 	protected String innerAllXml() {
-		// TODO Auto-generated method stub
-		return null;
+		return innerPostXml();
 	}
 
 	@Override
 	public boolean isSet() {
-		return (this.entityIds != null);
+		return (this.entityIds != null && entityIds.size() > 0);
 	}
 
 	public List<Integer> getEntityIds() {
