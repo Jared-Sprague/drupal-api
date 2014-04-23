@@ -1,0 +1,10 @@
+{
+    "vid": "3",
+    "name": "Tags",
+    "machine_name": "tags",
+    "description": "generic tags",
+    "hierarchy": "1",
+    "module": "taxonomy",
+    "weight": "0",
+    "uri": "https:\/\/access.devgssci.devlab.phx1.redhat.com\/site\/api\/taxonomy_vocabulary\/3"
+  }

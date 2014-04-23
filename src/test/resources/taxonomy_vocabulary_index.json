@@ -1,0 +1,182 @@
+[
+  {
+    "vid": "63",
+    "name": "Userpoints",
+    "machine_name": "userpoints",
+    "description": "Automatically created by the userpoints module",
+    "hierarchy": "1",
+    "module": "userpoints",
+    "weight": "0",
+    "uri": "https:\/\/access.devgssci.devlab.phx1.redhat.com\/site\/api\/taxonomy_vocabulary\/63"
+  },
+  {
+    "vid": "7",
+    "name": "Type",
+    "machine_name": "type",
+    "description": "Solution Type",
+    "hierarchy": "0",
+    "module": "taxonomy",
+    "weight": "0",
+    "uri": "https:\/\/access.devgssci.devlab.phx1.redhat.com\/site\/api\/taxonomy_vocabulary\/7"
+  },
+  {
+    "vid": "3",
+    "name": "Tags",
+    "machine_name": "tags",
+    "description": "",
+    "hierarchy": "1",
+    "module": "taxonomy",
+    "weight": "0",
+    "uri": "https:\/\/access.devgssci.devlab.phx1.redhat.com\/site\/api\/taxonomy_vocabulary\/3"
+  },
+  {
+    "vid": "6",
+    "name": "SBR",
+    "machine_name": "sbr",
+    "description": "",
+    "hierarchy": "0",
+    "module": "taxonomy",
+    "weight": "0",
+    "uri": "https:\/\/access.devgssci.devlab.phx1.redhat.com\/site\/api\/taxonomy_vocabulary\/6"
+  },
+  {
+    "vid": "1",
+    "name": "Products",
+    "machine_name": "products",
+    "description": "list of products",
+    "hierarchy": "0",
+    "module": "taxonomy",
+    "weight": "0",
+    "uri": "https:\/\/access.devgssci.devlab.phx1.redhat.com\/site\/api\/taxonomy_vocabulary\/1"
+  },
+  {
+    "vid": "43",
+    "name": "Page Templates",
+    "machine_name": "page_templates",
+    "description": "Allows users to choose the type of template for the Page content type",
+    "hierarchy": "0",
+    "module": "taxonomy",
+    "weight": "0",
+    "uri": "https:\/\/access.devgssci.devlab.phx1.redhat.com\/site\/api\/taxonomy_vocabulary\/43"
+  },
+  {
+    "vid": "23",
+    "name": "Mega Menu Tabs",
+    "machine_name": "mega_menu_tabs",
+    "description": "List of Mega Menu Parents",
+    "hierarchy": "0",
+    "module": "taxonomy",
+    "weight": "0",
+    "uri": "https:\/\/access.devgssci.devlab.phx1.redhat.com\/site\/api\/taxonomy_vocabulary\/23"
+  },
+  {
+    "vid": "93",
+    "name": "Language",
+    "machine_name": "language",
+    "description": "List of current Drupal Languages.",
+    "hierarchy": "0",
+    "module": "taxonomy",
+    "weight": "0",
+    "uri": "https:\/\/access.devgssci.devlab.phx1.redhat.com\/site\/api\/taxonomy_vocabulary\/93"
+  },
+  {
+    "vid": "73",
+    "name": "Labs Types",
+    "machine_name": "labs_types",
+    "description": "Types of Access Labs",
+    "hierarchy": "0",
+    "module": "taxonomy",
+    "weight": "0",
+    "uri": "https:\/\/access.devgssci.devlab.phx1.redhat.com\/site\/api\/taxonomy_vocabulary\/73"
+  },
+  {
+    "vid": "53",
+    "name": "Internal Tags",
+    "machine_name": "internal_tags",
+    "description": "",
+    "hierarchy": "0",
+    "module": "taxonomy",
+    "weight": "0",
+    "uri": "https:\/\/access.devgssci.devlab.phx1.redhat.com\/site\/api\/taxonomy_vocabulary\/53"
+  },
+  {
+    "vid": "133",
+    "name": "Industry",
+    "machine_name": "industry",
+    "description": "",
+    "hierarchy": "0",
+    "module": "taxonomy",
+    "weight": "0",
+    "uri": "https:\/\/access.devgssci.devlab.phx1.redhat.com\/site\/api\/taxonomy_vocabulary\/133"
+  },
+  {
+    "vid": "83",
+    "name": "Geography",
+    "machine_name": "geography",
+    "description": "",
+    "hierarchy": "0",
+    "module": "taxonomy",
+    "weight": "0",
+    "uri": "https:\/\/access.devgssci.devlab.phx1.redhat.com\/site\/api\/taxonomy_vocabulary\/83"
+  },
+  {
+    "vid": "123",
+    "name": "Ecosystem",
+    "machine_name": "ecosystem",
+    "description": "",
+    "hierarchy": "0",
+    "module": "taxonomy",
+    "weight": "0",
+    "uri": "https:\/\/access.devgssci.devlab.phx1.redhat.com\/site\/api\/taxonomy_vocabulary\/123"
+  },
+  {
+    "vid": "5",
+    "name": "Components",
+    "machine_name": "components",
+    "description": "",
+    "hierarchy": "0",
+    "module": "taxonomy",
+    "weight": "0",
+    "uri": "https:\/\/access.devgssci.devlab.phx1.redhat.com\/site\/api\/taxonomy_vocabulary\/5"
+  },
+  {
+    "vid": "113",
+    "name": "Category - Software",
+    "machine_name": "category_software",
+    "description": "",
+    "hierarchy": "0",
+    "module": "taxonomy",
+    "weight": "0",
+    "uri": "https:\/\/access.devgssci.devlab.phx1.redhat.com\/site\/api\/taxonomy_vocabulary\/113"
+  },
+  {
+    "vid": "103",
+    "name": "Category - Hardware",
+    "machine_name": "category_hardware",
+    "description": "",
+    "hierarchy": "0",
+    "module": "taxonomy",
+    "weight": "0",
+    "uri": "https:\/\/access.devgssci.devlab.phx1.redhat.com\/site\/api\/taxonomy_vocabulary\/103"
+  },
+  {
+    "vid": "4",
+    "name": "Category",
+    "machine_name": "category",
+    "description": "",
+    "hierarchy": "0",
+    "module": "taxonomy",
+    "weight": "0",
+    "uri": "https:\/\/access.devgssci.devlab.phx1.redhat.com\/site\/api\/taxonomy_vocabulary\/4"
+  },
+  {
+    "vid": "13",
+    "name": "Article Type",
+    "machine_name": "article_type",
+    "description": "",
+    "hierarchy": "0",
+    "module": "taxonomy",
+    "weight": "0",
+    "uri": "https:\/\/access.devgssci.devlab.phx1.redhat.com\/site\/api\/taxonomy_vocabulary\/13"
+  }
+]
