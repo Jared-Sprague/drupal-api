@@ -23,4 +23,10 @@ public class TaxonomyTermIndexTest extends TestCase {
 		assertEquals(3, term.getVid().intValue());
 		assertEquals("10-gige", term.getName());
 	}
+	
+	public void testGenerateGetTreeJson() throws Exception {
+		String json = TaxonomyTermIndex.generateGetTreeJson(3);
+		System.out.println(json);
+		assertEquals("{\"vid\":3}", json);
+	}
 }

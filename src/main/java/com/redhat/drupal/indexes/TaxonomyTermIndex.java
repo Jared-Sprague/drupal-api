@@ -2,7 +2,9 @@ package com.redhat.drupal.indexes;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -24,5 +26,18 @@ public class TaxonomyTermIndex {
 
 	public static List<TaxonomyTerm> getTerms() {
 		return terms;
+	}
+	
+	/**
+	 * Returns the json needed to POST to the getTree operation of taxonomy_vocabulary resource
+	 * to get a list of terms for a given vid.
+	 * @param vid - Vocabulary ID
+	 * @return
+	 */
+	public static String generateGetTreeJson(int vid) {
+		Gson gson = new Gson();
+		Map<String, Integer> vidMap = new HashMap<>();
+		vidMap.put("vid", vid);
+		return gson.toJson(vidMap);
 	}
 }
