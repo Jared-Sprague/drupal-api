@@ -32,6 +32,9 @@ public abstract class IdListField extends Field {
 
 		// Parse the list of IDs into the entityIds list
 		NodeList nodes = parseNodeList("//" + this.machineName + "/und/item", xml);
+                if (null == nodes){
+                    return;
+                }
 		for (int i = 0; i < nodes.getLength(); i++) {
 			Node node = nodes.item(i);
 			Integer value = Utils.safeNewInteger(parseField("./" + this.itemValueElementName, node));
