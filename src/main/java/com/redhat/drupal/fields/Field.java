@@ -24,10 +24,6 @@ public abstract class Field {
 		return machineName;
 	}
 
-	public void setMachineName(String machineName) {
-		this.machineName = machineName;
-	}
-
 	protected String parseField(String fieldName, String xml) {
 		String parsedField = null;
 		try {
