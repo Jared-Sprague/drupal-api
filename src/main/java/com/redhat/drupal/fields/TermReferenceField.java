@@ -43,6 +43,9 @@ public class TermReferenceField extends Field {
 
 		// Parse the term elements into a new term
 		NodeList nodes = parseNodeList("//" + this.machineName + "/und/item", xml);
+                if (null == nodes){
+                    return;
+                }
 		for (int i = 0; i < nodes.getLength(); i++) {
 			Node node = nodes.item(i);
 			String name = parseField("./name", node);
