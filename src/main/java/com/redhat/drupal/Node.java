@@ -111,6 +111,14 @@ public abstract class Node {
 			sb.append(field.toPostXml());
 		}
 	}
+	
+	protected String generateCommonXml() {
+		StringBuffer sb = new StringBuffer();
+		if (title != null) {
+			sb.append("<title>").append(this.title).append("</title>");
+		}
+		return sb.toString();
+	}
 
 	public Integer getNid() {
 		return nid;
