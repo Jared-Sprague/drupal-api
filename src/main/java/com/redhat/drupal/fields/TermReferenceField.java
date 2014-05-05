@@ -31,10 +31,6 @@ public class TermReferenceField extends Field {
 		return vocabularyName;
 	}
 
-	public void setVocabularyName(String vocabularyName) {
-		this.vocabularyName = vocabularyName;
-	}
-
 	@Override
 	public void fromXml(String xml) {
 		if (StringUtils.isBlank(xml)) {

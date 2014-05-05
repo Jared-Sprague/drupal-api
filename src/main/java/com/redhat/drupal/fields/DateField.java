@@ -12,12 +12,18 @@ public class DateField extends Field {
 	private String timezone;
 	private String timezoneDb;
 	private String dateType;
+	private String inputDateFormat;
+	private String outputDateFormat;
 	
-	public DateField(String machineName) {
+	public DateField(String inputDateFormat, String outputDateFormat, String machineName) {
+		this.inputDateFormat = inputDateFormat;
+		this.outputDateFormat = outputDateFormat;
 		this.machineName = machineName;
 	}
 	
-	public DateField(String machineName, String xml) {
+	public DateField(String inputDateFormat, String outputDateFormat, String machineName, String xml) {
+		this.inputDateFormat = inputDateFormat;
+		this.outputDateFormat = outputDateFormat;
 		this.machineName = machineName;
 		fromXml(xml);
 	}
@@ -29,7 +35,7 @@ public class DateField extends Field {
 		}
 		
 		// format for POST and PUT date string: 03/14/2014 - 15:15:15
-		String dateString = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH).format(this.value);
+		String dateString = new SimpleDateFormat(inputDateFormat, Locale.ENGLISH).format(this.value);
 		return "<item><value><date>" + dateString + "</date></value></item>";
 	}
 
@@ -49,7 +55,7 @@ public class DateField extends Field {
 		}
 		
 		try {
-			this.value = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).parse(dateString);
+			this.value = new SimpleDateFormat(outputDateFormat, Locale.ENGLISH).parse(dateString);
 		} catch (ParseException e) {
 			e.printStackTrace();
 			this.value = null;
@@ -108,5 +114,13 @@ public class DateField extends Field {
 
 	public void setDateType(String dateType) {
 		this.dateType = dateType;
+	}
+
+	public String getInputDateFormat() {
+		return inputDateFormat;
+	}
+
+	public String getOutputDateFormat() {
+		return outputDateFormat;
 	}
 }
