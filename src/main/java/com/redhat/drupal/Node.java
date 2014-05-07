@@ -1,13 +1,6 @@
 package com.redhat.drupal;
 
-import java.io.StringReader;
-
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
-
 import org.apache.commons.lang.StringUtils;
-import org.xml.sax.InputSource;
 
 import com.redhat.drupal.exceptions.InvalidNodeXmlException;
 import com.redhat.drupal.fields.Field;
@@ -31,10 +24,7 @@ public abstract class Node {
 	protected Integer revisionUid;  // uid of revision author
 	protected String accessState;  // access state for private, retired, active
 	protected String path;  // full URL path to this node
-	protected String name;  // username of the person who created this node
 	
-	private XPathFactory xpathFactory = XPathFactory.newInstance();
-	private XPath xpath = xpathFactory.newXPath();
 
 	/**
 	 * Parse the out the common node fields from the XML from a services GET request
@@ -45,34 +35,33 @@ public abstract class Node {
 			throw new InvalidNodeXmlException("Invalid node XML: " + xml);
 		}
 		
-		this.nid = Utils.safeNewInteger(parseField("/result/nid", xml));
-		this.uid = Utils.safeNewInteger(parseField("/result/uid", xml));
-		this.title = parseField("/result/title", xml);
-		this.log = parseField("/result/log", xml);
-		this.status = safeNewBoolean(parseField("/result/status", xml));
-		this.comment = Utils.safeNewInteger(parseField("/result/comment", xml));		
-		this.vid = Utils.safeNewInteger(parseField("/result/vid", xml));
-		this.type = parseField("/result/type", xml);
-		this.language = parseField("/result/language", xml);
-		this.created = Utils.safeNewInteger(parseField("/result/created", xml));	
-		this.changed = Utils.safeNewInteger(parseField("/result/changed", xml));
-		this.tnid = Utils.safeNewInteger(parseField("/result/tnid", xml));	
-		this.translate = safeNewBoolean(parseField("/result/translate", xml));
+		this.nid = Utils.safeNewInteger(Utils.parseField("/result/nid", xml));
+		this.uid = Utils.safeNewInteger(Utils.parseField("/result/uid", xml));
+		this.title = Utils.parseField("/result/title", xml);
+		this.log = Utils.parseField("/result/log", xml);
+		this.status = safeNewBoolean(Utils.parseField("/result/status", xml));
+		this.comment = Utils.safeNewInteger(Utils.parseField("/result/comment", xml));		
+		this.vid = Utils.safeNewInteger(Utils.parseField("/result/vid", xml));
+		this.type = Utils.parseField("/result/type", xml);
+		this.language = Utils.parseField("/result/language", xml);
+		this.created = Utils.safeNewInteger(Utils.parseField("/result/created", xml));	
+		this.changed = Utils.safeNewInteger(Utils.parseField("/result/changed", xml));
+		this.tnid = Utils.safeNewInteger(Utils.parseField("/result/tnid", xml));	
+		this.translate = safeNewBoolean(Utils.parseField("/result/translate", xml));
 		
 		//TODO: move these red hat specific fields to the red hat content types library
-		this.revisionTimestamp = Utils.safeNewInteger(parseField("/result/revision_timestamp", xml));	
-		this.revisionUid = Utils.safeNewInteger(parseField("/result/revision_uid", xml));
-		this.accessState = parseField("/result/access_state", xml);
-		this.path = parseField("/result/path", xml);
-		this.name = parseField("/result/name", xml);
+		this.revisionTimestamp = Utils.safeNewInteger(Utils.parseField("/result/revision_timestamp", xml));	
+		this.revisionUid = Utils.safeNewInteger(Utils.parseField("/result/revision_uid", xml));
+		this.accessState = Utils.parseField("/result/access_state", xml);
+		this.path = Utils.parseField("/result/path", xml);
 	}
 	
 	private boolean validNodeXml(String xml) {
 		// At the minimum it should have nid, type, title
 		//TODO: Better xml validation. In the absense of an xsd this validation is pretty weak
-		nid = Utils.safeNewInteger(parseField("/result/nid", xml));
-		title = parseField("/result/title", xml);
-		type = parseField("/result/type", xml);
+		nid = Utils.safeNewInteger(Utils.parseField("/result/nid", xml));
+		title = Utils.parseField("/result/title", xml);
+		type = Utils.parseField("/result/type", xml);
 		
 		if (nid == null || title == null || type == null) {
 			return false;
@@ -92,20 +81,6 @@ public abstract class Node {
 		return null;
 	}
 
-	private String parseField(String fieldName, String xml) {
-		String parsedField = null;
-		try {
-			parsedField = xpath.evaluate(fieldName, new InputSource(new StringReader(xml)));
-		} catch (XPathExpressionException e) {
-			e.printStackTrace();
-		} 
-		
-		if (StringUtils.isBlank(parsedField)) {
-			parsedField = null;  
-		}
-		return parsedField;
-	}
-	
 	protected void appendValidXml(StringBuffer sb, Field field) {
 		if (field.isSet()) {
 			sb.append(field.toPostXml());
@@ -254,13 +229,5 @@ public abstract class Node {
 
 	public void setPath(String path) {
 		this.path = path;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 }

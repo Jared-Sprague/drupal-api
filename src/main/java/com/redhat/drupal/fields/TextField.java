@@ -1,5 +1,7 @@
 package com.redhat.drupal.fields;
 
+import com.redhat.drupal.Utils;
+
 
 public class TextField extends Field {
 	protected String value;
@@ -39,9 +41,9 @@ public class TextField extends Field {
 	
 	@Override
 	public void fromXml(String xml) {
-		this.value = parseField("//" + this.machineName + "//value", xml);
-		this.safeValue = parseField("//" + this.machineName + "//safe_value", xml);
-		this.format = parseField("//" + this.machineName + "//format", xml);
+		this.value = Utils.parseField("//" + this.machineName + "//value", xml);
+		this.safeValue = Utils.parseField("//" + this.machineName + "//safe_value", xml);
+		this.format = Utils.parseField("//" + this.machineName + "//format", xml);
 	}
 
 	@Override

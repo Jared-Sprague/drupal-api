@@ -37,7 +37,7 @@ public abstract class IdListField extends Field {
                 }
 		for (int i = 0; i < nodes.getLength(); i++) {
 			Node node = nodes.item(i);
-			Integer value = Utils.safeNewInteger(parseField("./" + this.itemValueElementName, node));
+			Integer value = Utils.safeNewInteger(Utils.parseField("./" + this.itemValueElementName, node));
 			if (value != null) {
 				entityIds.add(value);
 			}

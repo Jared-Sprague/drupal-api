@@ -44,9 +44,9 @@ public class TermReferenceField extends Field {
                 }
 		for (int i = 0; i < nodes.getLength(); i++) {
 			Node node = nodes.item(i);
-			String name = parseField("./name", node);
-			Integer tid = Utils.safeNewInteger(parseField("./tid", node));
-			Integer vid = Utils.safeNewInteger(parseField("./vid", node));
+			String name = Utils.parseField("./name", node);
+			Integer tid = Utils.safeNewInteger(Utils.parseField("./tid", node));
+			Integer vid = Utils.safeNewInteger(Utils.parseField("./vid", node));
 			
 			// minimum required value is the tid
 			if (tid != null && tid.intValue() > 0) {

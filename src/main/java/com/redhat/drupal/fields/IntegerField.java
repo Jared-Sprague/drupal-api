@@ -16,7 +16,7 @@ public class IntegerField extends Field {
 
 	@Override
 	public void fromXml(String xml) {
-		this.value = Utils.safeNewInteger(parseField("//" + this.machineName + "//value", xml));
+		this.value = Utils.safeNewInteger(Utils.parseField("//" + this.machineName + "//value", xml));
 	}
 
 	@Override

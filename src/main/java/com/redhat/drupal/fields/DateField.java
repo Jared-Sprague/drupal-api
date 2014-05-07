@@ -7,6 +7,8 @@ import java.util.Locale;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.redhat.drupal.Utils;
+
 public class DateField extends Field {
 	private Date value;
 	private String timezone;
@@ -43,7 +45,7 @@ public class DateField extends Field {
 	public void fromXml(String xml) {
 		// Date format from GET XML: 2014-03-14 14:15:00
 		
-		String dateString = parseField("//" + this.machineName + "//value", xml);
+		String dateString = Utils.parseField("//" + this.machineName + "//value", xml);
 		
 		// if there is no date sting then this isn't valid date field XML so ignore it
 		if (StringUtils.isBlank(dateString)) {
@@ -60,9 +62,9 @@ public class DateField extends Field {
 			e.printStackTrace();
 			this.value = null;
 		}
-		this.timezone = parseField("//" + this.machineName + "//timezone", xml);
-		this.timezoneDb = parseField("//" + this.machineName + "//timezone_db", xml);
-		this.dateType = parseField("//" + this.machineName + "//date_type", xml);
+		this.timezone = Utils.parseField("//" + this.machineName + "//timezone", xml);
+		this.timezoneDb = Utils.parseField("//" + this.machineName + "//timezone_db", xml);
+		this.dateType = Utils.parseField("//" + this.machineName + "//date_type", xml);
 	}
 	
 	@Override

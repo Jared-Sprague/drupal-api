@@ -8,7 +8,6 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import org.apache.commons.lang.StringUtils;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
@@ -22,34 +21,6 @@ public abstract class Field {
 
 	public String getMachineName() {
 		return machineName;
-	}
-
-	protected String parseField(String fieldName, String xml) {
-		String parsedField = null;
-		try {
-			parsedField = xpath.evaluate(fieldName, new InputSource(new StringReader(xml)));
-		} catch (XPathExpressionException e) {
-			e.printStackTrace();
-		}
-
-		if (StringUtils.isBlank(parsedField)) {
-			parsedField = null;
-		}
-		return parsedField;
-	}
-	
-	protected String parseField(String fieldName, Node node) {
-		String parsedField = null;
-		try {
-			parsedField = xpath.evaluate(fieldName, node);
-		} catch (XPathExpressionException e) {
-			e.printStackTrace();
-		}
-
-		if (StringUtils.isBlank(parsedField)) {
-			parsedField = null;
-		}
-		return parsedField;
 	}
 	
 	protected NodeList parseNodeList(String exp, String xml) {
