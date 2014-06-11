@@ -99,16 +99,8 @@ public abstract class Node {
 		return nid;
 	}
 
-	public void setNid(Integer nid) {
-		this.nid = nid;
-	}
-
 	public Integer getUid() {
 		return uid;
-	}
-
-	public void setUid(Integer uid) {
-		this.uid = uid;
 	}
 
 	public String getTitle() {
@@ -131,24 +123,12 @@ public abstract class Node {
 		return status;
 	}
 
-	public void setStatus(Boolean status) {
-		this.status = status;
-	}
-
 	public Integer getComment() {
 		return comment;
 	}
 
-	public void setComment(Integer comment) {
-		this.comment = comment;
-	}
-
 	public Integer getVid() {
 		return vid;
-	}
-
-	public void setVid(Integer vid) {
-		this.vid = vid;
 	}
 
 	public String getType() {
@@ -161,10 +141,6 @@ public abstract class Node {
 
 	public String getLanguage() {
 		return language;
-	}
-
-	public void setLanguage(String language) {
-		this.language = language;
 	}
 
 	public Integer getCreated() {
@@ -187,32 +163,16 @@ public abstract class Node {
 		return tnid;
 	}
 
-	public void setTnid(Integer tnid) {
-		this.tnid = tnid;
-	}
-
 	public Boolean getTranslate() {
 		return translate;
-	}
-
-	public void setTranslate(Boolean translate) {
-		this.translate = translate;
 	}
 
 	public Integer getRevisionTimestamp() {
 		return revisionTimestamp;
 	}
 
-	public void setRevisionTimestamp(Integer revisionTimestamp) {
-		this.revisionTimestamp = revisionTimestamp;
-	}
-
 	public Integer getRevisionUid() {
 		return revisionUid;
-	}
-
-	public void setRevisionUid(Integer revisionUid) {
-		this.revisionUid = revisionUid;
 	}
 
 	public String getAccessState() {
@@ -225,9 +185,5 @@ public abstract class Node {
 
 	public String getPath() {
 		return path;
-	}
-
-	public void setPath(String path) {
-		this.path = path;
 	}
 }
