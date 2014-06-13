@@ -1,5 +1,7 @@
 package com.redhat.drupal.fields;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.redhat.drupal.Utils;
 
 
@@ -23,7 +25,13 @@ public class TextField extends Field {
 			return null;
 		}
 		
-		return "<item><value>" + this.value + "</value></item>";
+		String xml = "<item><value>" + this.value + "</value>";
+		if (!StringUtils.isBlank(format)) {
+			xml += "<format>" + this.format + "</format>";
+		}
+		xml += "</item>";
+		
+		return xml;
 	}
 
 	@Override

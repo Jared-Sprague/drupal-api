@@ -147,16 +147,8 @@ public abstract class Node {
 		return created;
 	}
 
-	public void setCreated(Integer created) {
-		this.created = created;
-	}
-
 	public Integer getChanged() {
 		return changed;
-	}
-
-	public void setChanged(Integer changed) {
-		this.changed = changed;
 	}
 
 	public Integer getTnid() {
