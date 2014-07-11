@@ -21,7 +21,7 @@
 
     <groupId>com.redhat.drupal</groupId>
     <artifactId>drupal-api</artifactId>
-    <version>1.6.0</version>
+    <version>1.7.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Drupal Services API</name>
