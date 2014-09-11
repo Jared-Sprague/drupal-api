@@ -178,4 +178,8 @@ public abstract class Node {
 	public String getPath() {
 		return path;
 	}
+	
+	public void setStatus(Boolean status) {
+		this.status = status;
+	}
 }
