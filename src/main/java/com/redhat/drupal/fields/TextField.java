@@ -1,5 +1,6 @@
 package com.redhat.drupal.fields;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 
 import com.redhat.drupal.Utils;
@@ -25,7 +26,7 @@ public class TextField extends Field {
 			return null;
 		}
 		
-		String xml = "<item><value>" + this.value + "</value>";
+		String xml = "<item><value>" + StringEscapeUtils.escapeXml(this.value) + "</value>";
 		if (!StringUtils.isBlank(format)) {
 			xml += "<format>" + this.format + "</format>";
 		}
