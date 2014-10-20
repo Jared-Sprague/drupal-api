@@ -22,7 +22,6 @@ public abstract class Node {
 	protected Boolean translate;   // A boolean indicating whether this translation page needs to be updated
 	protected Integer revisionTimestamp;  // timestimp of the revision
 	protected Integer revisionUid;  // uid of revision author
-	protected String accessState;  // access state for private, retired, active
 	protected String path;  // full URL path to this node
 	
 
@@ -52,7 +51,6 @@ public abstract class Node {
 		//TODO: move these red hat specific fields to the red hat content types library
 		this.revisionTimestamp = Utils.safeNewInteger(Utils.parseField("/result/revision_timestamp", xml));	
 		this.revisionUid = Utils.safeNewInteger(Utils.parseField("/result/revision_uid", xml));
-		this.accessState = Utils.parseField("/result/access_state", xml);
 		this.path = Utils.parseField("/result/path", xml);
 	}
 	
@@ -165,14 +163,6 @@ public abstract class Node {
 
 	public Integer getRevisionUid() {
 		return revisionUid;
-	}
-
-	public String getAccessState() {
-		return accessState;
-	}
-
-	public void setAccessState(String accessState) {
-		this.accessState = accessState;
 	}
 
 	public String getPath() {
