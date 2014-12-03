@@ -10,8 +10,8 @@ import org.w3c.dom.NodeList;
 import com.redhat.drupal.Utils;
 
 public abstract class IdListField extends Field {
-	private List<Integer> entityIds = new ArrayList<Integer>(); 
-	private String itemValueElementName;
+	protected List<Integer> entityIds = new ArrayList<Integer>(); 
+	protected String itemValueElementName;
 	
 	public IdListField(String machineName, String itemValueElementName) {
 		this.machineName = machineName;
