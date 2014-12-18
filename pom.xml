@@ -21,7 +21,7 @@
 
     <groupId>com.redhat.drupal</groupId>
     <artifactId>drupal-api</artifactId>
-    <version>1.8.6-SNAPSHOT</version>
+    <version>1.8.6</version>
     <packaging>jar</packaging>
 
     <name>Drupal Services API</name>
@@ -121,4 +121,11 @@
             </plugin>
         </plugins>
     </build>
+    <distributionManagement>
+        <repository>
+            <id>bintray-jared-sprague-maven-drupal-api</id>
+            <name>jared-sprague-maven-drupal-api</name>
+            <url>https://api.bintray.com/maven/jared-sprague/maven/drupal-api</url>
+        </repository>
+    </distributionManagement>    
 </project>
