@@ -121,4 +121,11 @@
             </plugin>
         </plugins>
     </build>
+    <distributionManagement>
+        <repository>
+            <id>bintray-jared-sprague-maven-drupal-api</id>
+            <name>jared-sprague-maven-drupal-api</name>
+            <url>https://api.bintray.com/maven/jared-sprague/maven/drupal-api</url>
+        </repository>
+    </distributionManagement>    
 </project>
