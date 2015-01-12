@@ -21,7 +21,7 @@
 
     <groupId>com.redhat.drupal</groupId>
     <artifactId>drupal-api</artifactId>
-    <version>1.8.7</version>
+    <version>1.8.8</version>
     <packaging>jar</packaging>
 
     <name>Drupal Services API</name>
