@@ -6,7 +6,7 @@ import org.w3c.dom.NodeList;
 
 import com.redhat.drupal.Utils;
 
-public abstract class ImageField extends Field {
+public class ImageField extends Field {
         protected Integer fid;
         protected Integer uid;
         protected String fileName;
@@ -76,6 +76,11 @@ public abstract class ImageField extends Field {
 	@Override
 	protected String innerAllXml() {
 		return innerPostXml();
+	}
+
+	@Override
+	public boolean isSet() {
+		return this.fid != null;
 	}
 
 	public Integer getFid() {
