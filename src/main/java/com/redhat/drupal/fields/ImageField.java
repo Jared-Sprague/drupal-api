@@ -17,29 +17,12 @@ public abstract class ImageField extends Field {
         protected Integer width;
         
 	
-	public ImageField(String machineName, Integer fid, Integer uid, String fileName, String uri, String mimeType, Integer fileSize, Integer height, Integer width) {
+	public ImageField(String machineName) {
 		this.machineName = machineName;
-		this.fid = fid;
-		this.uid = uid;
-		this.fileName = fileName;
-		this.uri = uri;
-		this.mimeType = mimeType;
-		this.fileSize = fileSize;
-		this.height = height;
-		this.width = width;
-                
 	}
 	
-	public ImageField(String machineName, Integer fid, Integer uid, String fileName, String uri, String mimeType, Integer fileSize, Integer height, Integer width, String xml) {
+	public ImageField(String machineName, String xml) {
 		this.machineName = machineName;
-		this.fid = fid;
-		this.uid = uid;
-		this.fileName = fileName;
-		this.uri = uri;
-		this.mimeType = mimeType;
-		this.fileSize = fileSize;
-		this.height = height;
-		this.width = width;
 		fromXml(xml);
 	}
 
