@@ -41,7 +41,7 @@ public class ImageField extends Field {
 			Node node = nodes.item(i);
 			this.fid = Utils.safeNewInteger(Utils.parseField("./fid", node));
 			this.uid = Utils.safeNewInteger(Utils.parseField("./uid", node));
-			this.fileName = Utils.parseField("./fileName", node);
+			this.fileName = Utils.parseField("./filename", node);
 			this.mimeType = Utils.parseField("./filemime", node);
 			this.fileSize = Utils.safeNewInteger(Utils.parseField("./filesize", node));
 			this.height = Utils.safeNewInteger(Utils.parseField("./height", node));
