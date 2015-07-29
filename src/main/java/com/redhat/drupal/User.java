@@ -27,9 +27,8 @@ public abstract class User {
 		// At the minimum it should have uid, name, mail
 		uid = Utils.safeNewInteger(Utils.parseField("/result/uid", xml));
 		name = Utils.parseField("/result/name", xml);
-		mail = Utils.parseField("/result/mail", xml);
 
-		if (uid == null || name == null || mail == null) {
+		if (uid == null || name == null) {
 			return false;
 		}
 
