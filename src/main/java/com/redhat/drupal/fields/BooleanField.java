@@ -4,11 +4,11 @@ import com.redhat.drupal.Utils;
 
 public class BooleanField extends Field {
 	private Boolean value;
-	
+
 	public BooleanField(String machineName) {
 		this.machineName = machineName;
 	}
-	
+
 	public BooleanField(String machineName, String xml) {
 		this.machineName = machineName;
 		fromXml(xml);
@@ -17,9 +17,9 @@ public class BooleanField extends Field {
 	@Override
 	public void fromXml(String xml) {
 		Integer intValue = Utils.safeNewInteger(Utils.parseField("//" + this.machineName + "//value", xml));
-		if (intValue == null || intValue == 0) {
-			this.value = false;
-		} else {
+		if (intValue == 0) {
+                        this.value = false;
+		} else if (intValue != null) {
 			this.value = true;
 		}
 	}
@@ -29,12 +29,12 @@ public class BooleanField extends Field {
 		if (!isSet()) {
 			return null;
 		}
-		
+
 		int intValue = this.value ? 1 : 0;
-		
+
 		return "<item><value>" + intValue + "</value></item>";
 	}
-	
+
 	@Override
 	public boolean isSet() {
 		return this.value != null;
@@ -54,5 +54,5 @@ public class BooleanField extends Field {
 		this.value = value;
 	}
 
-	
+
 }
