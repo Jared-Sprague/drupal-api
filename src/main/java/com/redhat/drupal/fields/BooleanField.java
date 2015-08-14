@@ -17,11 +17,13 @@ public class BooleanField extends Field {
 	@Override
 	public void fromXml(String xml) {
 		Integer intValue = Utils.safeNewInteger(Utils.parseField("//" + this.machineName + "//value", xml));
-		if (intValue == 0) {
-                        this.value = false;
-		} else if (intValue != null) {
-			this.value = true;
-		}
+                if (intValue != null) {
+                    if (intValue == 0) {
+                            this.value = false;
+                    } else {
+                            this.value = true;
+                    }
+                }
 	}
 
 	@Override
