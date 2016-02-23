@@ -123,9 +123,9 @@
     </build>
     <distributionManagement>
         <repository>
-            <id>bintray-jared-sprague-maven-drupal-api</id>
+            <id>bintray-jared-sprague-maven</id>
             <name>jared-sprague-maven-drupal-api</name>
-            <url>https://api.bintray.com/maven/jared-sprague/maven/drupal-api</url>
+            <url>https://api.bintray.com/maven/jared-sprague/maven/drupal-api/;publish=1</url>
         </repository>
     </distributionManagement>    
 </project>
