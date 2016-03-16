@@ -10,18 +10,39 @@ import org.w3c.dom.NodeList;
 import com.redhat.drupal.Utils;
 
 public abstract class IdListField extends Field {
-	protected List<Integer> entityIds = new ArrayList<Integer>(); 
+	protected List<Integer> entityIds = new ArrayList<Integer>();
 	protected String itemValueElementName;
-	
+
 	public IdListField(String machineName, String itemValueElementName) {
 		this.machineName = machineName;
 		this.itemValueElementName = itemValueElementName;
 	}
-	
+
 	public IdListField(String machineName, String itemValueElementName, String xml) {
 		this.machineName = machineName;
 		this.itemValueElementName = itemValueElementName;
 		fromXml(xml);
+	}
+
+	public IdListField(String machineName, String itemValueElementName, Node node) {
+		this.machineName = machineName;
+		this.itemValueElementName = itemValueElementName;
+		fromNode(node);
+	}
+
+	public void fromNode(Node node) {
+		// Parse the list of IDs into the entityIds list
+		NodeList nodes = parseNodeListFromNode("//" + this.machineName + "/und/item", node);
+                if (null == nodes){
+                    return;
+                }
+		for (int i = 0; i < nodes.getLength(); i++) {
+			Node thisNode = nodes.item(i);
+			Integer value = Utils.safeNewInteger(Utils.parseField("./" + this.itemValueElementName, thisNode));
+			if (value != null) {
+				entityIds.add(value);
+			}
+		}
 	}
 
 	@Override
@@ -49,16 +70,16 @@ public abstract class IdListField extends Field {
 		if (!isSet()) {
 			return null;
 		}
-		
+
 		StringBuffer sb = new StringBuffer();
-		
+
 		// Generate the XML based on the entityIds list
 		for (Integer entityId : entityIds) {
 			String item = String.format("<item><%s>%d</%s></item>", this.itemValueElementName,
 					entityId.intValue(), this.itemValueElementName);
 			sb.append(item);
 		}
-		
+
 		return sb.toString();
 	}
 

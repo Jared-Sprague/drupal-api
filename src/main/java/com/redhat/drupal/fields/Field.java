@@ -9,6 +9,7 @@ import javax.xml.xpath.XPathFactory;
 
 import org.apache.commons.lang.StringUtils;
 import org.w3c.dom.NodeList;
+import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 
 public abstract class Field {
@@ -22,14 +23,14 @@ public abstract class Field {
 	public String getMachineName() {
 		return machineName;
 	}
-	
+
 	protected NodeList parseNodeList(String exp, String xml) {
 		NodeList parsedNodeList = null;
-		
+
 		if (StringUtils.isBlank(xml)) {
 			return null;
 		}
-		
+
 		try {
 			parsedNodeList = (NodeList) xpath.evaluate(exp, new InputSource(new StringReader(xml)),
 					XPathConstants.NODESET);
@@ -40,13 +41,30 @@ public abstract class Field {
 		if (parsedNodeList != null && parsedNodeList.getLength() == 0) {
 			parsedNodeList = null;
 		}
-		
+
+		return parsedNodeList;
+	}
+
+	protected NodeList parseNodeListFromNode(String exp, Node node) {
+		NodeList parsedNodeList = null;
+
+		try {
+			parsedNodeList = (NodeList) xpath.evaluate(exp, node,
+					XPathConstants.NODESET);
+		} catch (XPathExpressionException e) {
+			e.printStackTrace();
+		}
+
+		if (parsedNodeList != null && parsedNodeList.getLength() == 0) {
+			parsedNodeList = null;
+		}
+
 		return parsedNodeList;
 	}
 
 	/**
 	 * Wrapper XML that all field types use
-	 * 
+	 *
 	 * @param innerXml
 	 * @return
 	 */

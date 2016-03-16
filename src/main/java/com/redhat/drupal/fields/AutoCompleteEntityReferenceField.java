@@ -1,4 +1,5 @@
 package com.redhat.drupal.fields;
+import org.w3c.dom.Node;
 
 public class AutoCompleteEntityReferenceField extends EntityReferenceField {
 
@@ -8,6 +9,10 @@ public class AutoCompleteEntityReferenceField extends EntityReferenceField {
 
 	public AutoCompleteEntityReferenceField(String machineName, String xml) {
 		super(machineName, xml);
+	}
+
+	public AutoCompleteEntityReferenceField(String machineName, Node node) {
+		super(machineName, node);
 	}
 
 	@Override

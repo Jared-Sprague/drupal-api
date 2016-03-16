@@ -1,4 +1,5 @@
 package com.redhat.drupal.fields;
+import org.w3c.dom.Node;
 
 public class SelectTextField extends TextField {
 	public SelectTextField(String machineName) {
@@ -7,6 +8,10 @@ public class SelectTextField extends TextField {
 
 	public SelectTextField(String machineName, String xml) {
 		super(machineName, xml);
+	}
+
+	public SelectTextField(String machineName, Node node) {
+		super(machineName, node);
 	}	
 	
 	@Override

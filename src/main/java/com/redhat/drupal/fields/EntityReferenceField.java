@@ -1,4 +1,5 @@
 package com.redhat.drupal.fields;
+import org.w3c.dom.Node;
 
 public class EntityReferenceField extends IdListField {
 
@@ -10,6 +11,10 @@ public class EntityReferenceField extends IdListField {
 	
 	public EntityReferenceField(String machineName, String xml) {
 		super(machineName, VALUE_ELEMENT_NAME, xml);
+	}
+
+	public EntityReferenceField(String machineName, Node node) {
+		super(machineName, VALUE_ELEMENT_NAME, node);
 	}
 
 }

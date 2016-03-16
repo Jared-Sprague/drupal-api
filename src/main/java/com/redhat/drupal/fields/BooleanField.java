@@ -1,6 +1,7 @@
 package com.redhat.drupal.fields;
 
 import com.redhat.drupal.Utils;
+import org.w3c.dom.Node;
 
 public class BooleanField extends Field {
 	private Boolean value;
@@ -14,9 +15,25 @@ public class BooleanField extends Field {
 		fromXml(xml);
 	}
 
+	public BooleanField(String machineName, Node node) {
+		this.machineName = machineName;
+		fromNode(node);
+	}
+
 	@Override
 	public void fromXml(String xml) {
 		Integer intValue = Utils.safeNewInteger(Utils.parseField("//" + this.machineName + "//value", xml));
+                if (intValue != null) {
+                    if (intValue == 0) {
+                            this.value = false;
+                    } else {
+                            this.value = true;
+                    }
+                }
+	}
+
+	public void fromNode(Node node) {
+		Integer intValue = Utils.safeNewInteger(Utils.parseField("//" + this.machineName + "//value", node));
                 if (intValue != null) {
                     if (intValue == 0) {
                             this.value = false;

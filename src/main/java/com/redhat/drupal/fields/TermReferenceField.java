@@ -13,7 +13,7 @@ import com.redhat.drupal.entities.TaxonomyTerm;
 public class TermReferenceField extends Field {
 	private List<TaxonomyTerm> terms = new ArrayList<TaxonomyTerm>();
 	private String vocabularyName;
-	
+
 	public TermReferenceField(String machineName, String vocabularyName) {
 		this.machineName = machineName;
 		this.vocabularyName = vocabularyName;
@@ -22,14 +22,43 @@ public class TermReferenceField extends Field {
 	public TermReferenceField(String machineName, String vocabularyName, String xml) {
 		this.machineName = machineName;
 		this.vocabularyName = vocabularyName;
-		
+
 		// parse XML into list of terms
 		fromXml(xml);
 	}
 
+
+	public TermReferenceField(String machineName, String vocabularyName, Node node) {
+		this.machineName = machineName;
+		this.vocabularyName = vocabularyName;
+
+		// parse XML into list of terms
+		fromNode(node);
+	}
 	public String getVocabularyName() {
 		return vocabularyName;
 	}
+
+	public void fromNode(Node node) {
+		// Parse the term elements into a new term
+		NodeList nodes = parseNodeListFromNode("//" + this.machineName + "/und/item", node);
+                if (null == nodes){
+                    return;
+                }
+		for (int i = 0; i < nodes.getLength(); i++) {
+			Node thisNode = nodes.item(i);
+			String name = Utils.parseField("./name", thisNode);
+			Integer tid = Utils.safeNewInteger(Utils.parseField("./tid", thisNode));
+			Integer vid = Utils.safeNewInteger(Utils.parseField("./vid", thisNode));
+
+			// minimum required value is the tid
+			if (tid != null && tid.intValue() > 0) {
+				TaxonomyTerm term = new TaxonomyTerm(tid, vid, name);
+				this.terms.add(term);  // add this term to the list of terms
+			}
+		}
+	}
+
 
 	@Override
 	public void fromXml(String xml) {
@@ -47,7 +76,7 @@ public class TermReferenceField extends Field {
 			String name = Utils.parseField("./name", node);
 			Integer tid = Utils.safeNewInteger(Utils.parseField("./tid", node));
 			Integer vid = Utils.safeNewInteger(Utils.parseField("./vid", node));
-			
+
 			// minimum required value is the tid
 			if (tid != null && tid.intValue() > 0) {
 				TaxonomyTerm term = new TaxonomyTerm(tid, vid, name);
@@ -61,16 +90,16 @@ public class TermReferenceField extends Field {
 		if (!isSet()) {
 			return null;
 		}
-		
+
 		StringBuffer sb = new StringBuffer();
-		
+
 		// Generate the XML based on the terms list
 		for (TaxonomyTerm term : terms) {
 			sb.append("<item>");
 			sb.append("<tid is_raw=\"true\">").append(term.getTid()).append("</tid>");
 			sb.append("</item>");
 		}
-		
+
 		return sb.toString();
 	}
 
@@ -89,7 +118,7 @@ public class TermReferenceField extends Field {
 				}
 			}
 		}
-		
+
 		return false;
 	}
 
