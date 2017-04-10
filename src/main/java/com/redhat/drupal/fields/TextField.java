@@ -49,7 +49,7 @@ public class TextField extends Field {
 
 		StringBuffer sb = new StringBuffer();
 		sb.append(innerPostXml());
-		sb.append("<safe_value>").append(this.safeValue).append("</safe_value>");
+		sb.append("<safe_value>").append(StringEscapeUtils.escapeXml(this.safeValue)).append("</safe_value>");
 		sb.append("<format>").append(this.format).append("</format>");
 		return sb.toString();
 	}

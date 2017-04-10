@@ -4,6 +4,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.redhat.drupal.exceptions.InvalidNodeXmlException;
 import com.redhat.drupal.fields.Field;
+import org.apache.commons.lang.StringEscapeUtils;
 
 
 public abstract class Node {
@@ -88,7 +89,7 @@ public abstract class Node {
 	protected String generateCommonXml() {
 		StringBuffer sb = new StringBuffer();
 		if (title != null) {
-			sb.append("<title>").append(this.title).append("</title>");
+			sb.append("<title>").append(StringEscapeUtils.escapeXml(this.title)).append("</title>");
 		}
 		return sb.toString();
 	}
