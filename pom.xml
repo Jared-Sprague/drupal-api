@@ -43,7 +43,7 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
-
+  
     <developers>
         <developer>
             <name>Jared Sprague</name>
@@ -54,7 +54,7 @@
             <timezone>-5</timezone>
         </developer>
     </developers>
-
+    
     <scm>
         <url>https://github.com/Jared-Sprague/drupal-api</url>
         <developerConnection>https://github.com/Jared-Sprague/drupal-api.git</developerConnection>
@@ -62,7 +62,7 @@
     </scm>
 
     <dependencies>
-        <dependency>
+	<dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.8</version>
@@ -70,24 +70,24 @@
         </dependency>
 
         <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>2.3</version>
+  	    <groupId>commons-lang</groupId>
+	    <artifactId>commons-lang</artifactId>
+	    <version>2.3</version>
         </dependency>   
 
-        <dependency>
+	<dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.4</version>
         </dependency> 
 
-        <dependency>
+	<dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.2.4</version>
         </dependency>
     </dependencies>
-
+    
     <build>
         <plugins>
             <plugin>
@@ -106,9 +106,21 @@
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.2.1</version>
             </plugin>
+            
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.1.2</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
-
     <distributionManagement>
         <repository>
             <id>bintray-jared-sprague-maven</id>
