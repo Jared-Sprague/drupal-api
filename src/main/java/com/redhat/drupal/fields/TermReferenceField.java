@@ -78,7 +78,7 @@ public class TermReferenceField extends Field {
 			Integer vid = Utils.safeNewInteger(Utils.parseField("./vid", node));
 
 			// minimum required value is the tid
-			if (tid != null && tid.intValue() > 0) {
+			if (tid != null && tid.intValue() > 0 && name != null && vid != null) {
 				TaxonomyTerm term = new TaxonomyTerm(tid, vid, name);
 				this.terms.add(term);  // add this term to the list of terms
 			}
